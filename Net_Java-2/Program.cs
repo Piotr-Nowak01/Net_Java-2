@@ -53,11 +53,21 @@ namespace Net_Java_2
         }
         public static async void wczytaj(string data,string waluta)
         {
+            double value;
             string call = "https://openexchangerates.org/api/historical/" + data + ".json?app_id=3183c3ec233b4b6783f194898d8accac";
             HttpClient client = new HttpClient();
             string json = await client.GetStringAsync(call);
             currency wal = JsonConvert.DeserializeObject<currency>(json);
-            Console.WriteLine("Waluta: "+waluta+" kurs: "+ wal.Rates[waluta] + " Dzien: "+data);
+            if ( wal.Rates.TryGetValue(waluta,out value))
+            {
+                
+                Console.WriteLine("Waluta: " + waluta + " kurs: " + wal.Rates[waluta] + " Dzien: " + data);
+            }
+            else
+            {
+                Console.WriteLine("Nie ma takiej waluty w tym API. \n");
+            }
+
         }
     }
 }
