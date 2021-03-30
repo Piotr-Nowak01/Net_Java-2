@@ -12,44 +12,22 @@ namespace Net_Java_2
     {
         static void Main(string[] args)
         {
-            var date = DateTime.Today;
-            string day = date.Day.ToString();
-            string month = date.Month.ToString();
-            string year = date.Year.ToString();
             string data="";
             string waluta = "";
-            string s = "Nie mozna podac kursu z dnia, ktory jeszcze nie nastapil";
             Console.WriteLine("Podaj datę, z której chcesz poznać kurs. Datę podaj w formacie rok-msc-dn");
             data = Console.ReadLine();
-            string year1 = data.Substring(0, 4);
-            string month1 = data.Substring(5, 2);
-            string day1 = data.Substring(8, 2);
-            int day_1 = int.Parse(day);
-            int month_1 = int.Parse(month);
-            int year_1 = int.Parse(year);
-            int day1_1 = int.Parse(day1);
-            int month1_1 = int.Parse(month1);
-            int year1_1 = int.Parse(year1);
-            if (year1_1 > year_1)
-            {
-                Console.WriteLine(s);
-            }
-            else if (year1_1 == year_1 && month1_1 > month_1)
-            {
-                Console.WriteLine(s);
-            }
-            else if (year1_1 == year_1 && month1_1 == month_1 && day1_1 > day_1)
-            {
-                Console.WriteLine(s);
-            }
-            else
+            if(data_spr(data))
             {
                 Console.WriteLine("Podaj walutę");
                 waluta = Console.ReadLine();
                 waluta = waluta.ToUpper();
                 wczytaj(data, waluta);
             }
-            Console.Read();
+            else
+            {
+                Console.WriteLine("Nie mozna podac kursu z dnia, ktory jeszcze nie nastapil");
+            }
+        Console.Read();
         }
         public static async void wczytaj(string data,string waluta)
         {
@@ -68,6 +46,22 @@ namespace Net_Java_2
                 Console.WriteLine("Nie ma takiej waluty w tym API. \n");
             }
 
+        }
+        public static bool data_spr (string data)
+        {
+            var date = DateTime.Today;
+            string year = data.Substring(0, 4);
+            string month = data.Substring(5, 2);
+            string day = data.Substring(8, 2);
+            int day1 = int.Parse(day);
+            int month1 = int.Parse(month);
+            int year1 = int.Parse(year);
+            var date1 = new DateTime(year1, month1,day1);
+            if(date1>date)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
