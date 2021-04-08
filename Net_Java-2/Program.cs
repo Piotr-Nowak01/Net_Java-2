@@ -25,7 +25,7 @@ namespace Net_Java_2
             }
             else
             {
-                Console.WriteLine("Nie mozna podac kursu z dnia, ktory jeszcze nie nastapil");
+                Console.WriteLine("Nie mozna podac kursu. Nieprawidlowa data.");
             }
         Console.Read();
         }
@@ -56,12 +56,170 @@ namespace Net_Java_2
             int day1 = int.Parse(day);
             int month1 = int.Parse(month);
             int year1 = int.Parse(year);
-            var date1 = new DateTime(year1, month1,day1);
-            if(date1>date)
+            if(date_check(day1,month1,year1))
+            {
+                var date1 = new DateTime(year1, month1, day1);
+                if (date1<date)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool date_check(int day, int month, int year)
+        {
+            if(year_check(year)&&month_check(month)&&day_check(day,month,year))
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
-            return true;
+        }
+        public static bool day_check(int day, int month, int year)
+        {
+            bool przestepne = false;
+            int x = year % 4;
+            int y = year % 100;
+            int z = year % 400;
+            bool wynik = true;
+            if(( x==0 && y!=0) || z==0)
+            {
+                przestepne = true;
+            }
+            switch(month)
+            {
+                case 1:
+                    {
+                        if (day<1 || day>31)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if(przestepne)
+                        {
+                            if (day < 1 || day > 29)
+                            {
+                                wynik = false;
+                            }
+                        }
+                        else
+                        {
+                            if (day < 1 || day > 28)
+                            {
+                                wynik = false;
+                            }
+                        }
+                        break;
+                    }
+                case 3:
+                    { 
+                        if (day < 1 || day > 31)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        if (day < 1 || day > 30)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        if (day < 1 || day > 31)
+                        {
+                            wynik = false;
+                        }
+                    break;
+                    }
+                case 6:
+                    {
+                        if (day < 1 || day > 30)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 7:
+                    {
+                        if (day < 1 || day > 31)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 8:
+                    {
+                        if (day < 1 || day > 31)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 9:
+                    {
+                        if (day < 1 || day > 30)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 10:
+                    {
+                        if (day < 1 || day > 31)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 11:
+                    {
+                        if (day < 1 || day > 30)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+                case 12:
+                    {
+                        if (day < 1 || day > 31)
+                        {
+                            wynik = false;
+                        }
+                        break;
+                    }
+            }
+            return wynik;
+        }
+        public static bool month_check(int month)
+        {
+            if(month>12 || month<0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public static bool year_check(int year)
+        {
+            if (year < 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
