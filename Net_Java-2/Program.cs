@@ -212,7 +212,7 @@ namespace Net_Java_2
         }
         public static bool year_check(int year)
         {
-            if (year < 0)
+            if (year < 1999)
             {
                 return false;
             }
