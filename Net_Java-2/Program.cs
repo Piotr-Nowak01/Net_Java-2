@@ -59,7 +59,7 @@ namespace Net_Java_2
             if(date_check(day1,month1,year1))
             {
                 var date1 = new DateTime(year1, month1, day1);
-                if (date1<date)
+                if (date1<=date)
                 {
                     return true;
                 }
